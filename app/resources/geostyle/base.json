@@ -1,0 +1,46 @@
+{
+    "version": 8,
+    "name": "Base",
+    "metadata": {
+        "mapbox:autocomposite": true,
+        "mapbox:type": "template",
+        "mapbox:sdk-support": {
+            "js": "0.50.0",
+            "android": "6.7.0",
+            "ios": "4.6.0"
+        }
+    },
+    "center": [-91.6034513193822, 52.3284501950468],
+    "zoom": 2.044754814400365,
+    "bearing": 0,
+    "pitch": 0,
+    "sources": {
+        "composite": {
+            "url": "mapbox://mapbox.mapbox-streets-v8",
+            "type": "vector"
+        }
+    },
+    "sprite": "mapbox://sprites/cailyncodes/cjvdr83ufft6b1fnv955r5dfu/ck2u8j60r58fu0sgyxrigm3cu",
+    "glyphs": "mapbox://fonts/cailyncodes/{fontstack}/{range}.pbf",
+    "layers": [
+        {
+            "id": "background",
+            "type": "background",
+            "paint": {"background-color": "hsl(0, 0%, 95%)"}
+        },
+        {
+            "id": "water",
+            "type": "fill",
+            "source": "composite",
+            "source-layer": "water",
+            "layout": {},
+            "paint": {"fill-color": "hsl(0, 0%, 25%)"}
+        }
+    ],
+    "created": "2019-05-07T12:12:38.730Z",
+    "id": "cjvdr83ufft6b1fnv955r5dfu",
+    "modified": "2019-05-07T12:18:20.913Z",
+    "owner": "cailyncodes",
+    "visibility": "private",
+    "draft": false
+}

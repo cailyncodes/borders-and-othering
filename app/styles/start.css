@@ -1,0 +1,162 @@
+html, body {
+    height: 100%;
+    width: 100%;
+
+    font-family: 'Open Sans', sans-serif;
+}
+
+body, h1, h2, p {
+    margin: 0;
+}
+
+body {
+    background-image: url("../images/Landing_Map_of_North_America_Full (2).jpg");
+    background-position: center;
+    background-size: cover;
+}
+
+header, footer {
+    background-color: #2b1b03bb;
+    color: #fdfdfd;
+}
+
+a, a:visited {
+    color: #fdfdfd;
+}
+
+header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    min-height: 9vw;
+
+    font-size: 1.7vw;
+
+    padding: 5px 0;
+
+    font-family: 'Frank Ruhl Libre', serif;
+}
+
+footer {
+    min-height: 2.2vh;
+
+    font-size: 1.2vw;
+
+    padding: 0.5vh 0.5vw;
+}
+
+main {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100% - 100px - 24px);
+
+    padding: 3vh 8vw;
+
+    background-color: #ececec11;
+    
+    color: #fdfdfd;
+
+    text-shadow: 1px 1px 3px #1f1f1fb3;
+}
+
+main div.tight-lines {
+    line-height: 1.6vw;
+}
+
+main > div {
+    text-align: justify;
+    font-size: 1.25vw;
+}
+
+blockquote {
+    text-align: left;
+    margin: 0;
+    font-size: 1.35vw;
+}
+
+blockquote p {
+    padding: 0px 80px;
+
+    font-style: italic;
+
+    line-height: 1.65vw;
+}
+
+blockquote p::before {
+    display: block;
+    content: "";
+    width: 40px;
+    height: 40px;
+    position: relative;
+    top: 30px;
+    left: -30px;
+    border-top: 8px solid #d0c5b4e6;
+    border-left: 8px solid #d0c5b4e6;
+}
+
+blockquote p::after {
+    display: block;
+    content: "";
+    width: 40px;
+    height: 40px;
+    position: relative;
+    bottom: 30px;
+    left: calc(100% - 48px + 30px);
+    border-right: 8px solid #d0c5b4e6;
+    border-bottom: 8px solid #d0c5b4e6;
+}
+
+/** Utility Classes */
+.center {
+    width: max-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-right-last {
+    text-align-last: right;
+}
+
+.full-row {
+    flex: 1 0 100%;
+
+    max-width: 815px;
+}
+
+.background {
+    padding: 3.5vh 5vw;
+    padding-bottom: 0px;
+}
+
+.default-background {
+    background-color: #2b1b0380;
+}
+
+.button {
+    width: max-content;
+    border-radius: 5px;
+    padding: 8px 17px;
+    cursor: pointer;
+
+    font-size: 1.6vw;
+}
+
+.default-button {
+    background: #2b1b03bb;
+    color: #fdfdfd;
+}
+
+.default-button:hover {
+    box-shadow: 2px 2px 6px 1px #5c523e;
+}
+
+/** Media queries */
+
+/** Custom ID */

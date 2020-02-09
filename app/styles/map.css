@@ -1,0 +1,296 @@
+html, body {
+    height: 100%;
+    width: 100%;
+
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body, h1, h2, p {
+    margin: 0;
+}
+
+header, footer {
+    background-color: #2b1b03;
+    color: #fdfdfd;
+}
+
+header {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    min-height: 55px;
+
+    padding: 1vh 0;  
+}
+
+header > div {
+    flex: 1 1 auto;
+    width: max-content;
+    padding-left: 2vw;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+header > div > h1 {
+    width: max-content;
+}
+
+nav {
+    flex: 0 0 auto;
+    align-self: center;
+}
+
+nav > ul {
+    display: inline-flex;
+    width: auto;
+
+    padding-right: 2vw;
+    
+    text-align: center;
+
+    list-style-type: none;
+}
+
+nav > ul > li {
+    width: auto;
+
+    margin-right: 2vw;
+
+    font-size: 1.1rem;
+}
+
+footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 25px;
+
+    padding: 0.25em 0.25em;
+
+    font-size: 0.77em;
+}
+
+main {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row-reverse;
+    min-height: calc(100% - 55px - 2vh - 1px);
+    max-height: calc(100vh - 55px - 2vh - 1px);
+
+    background-color: #ececec;
+    color: #212121;
+}
+
+main > .map {
+    flex: 1 1 0;
+
+    max-height: calc(100vh - 55px - 2vh - 1px);
+}
+
+main > .side {
+    flex: 1 1 0;
+    max-width: calc(300px - 2em);
+    max-height: calc(100vh - 55px - 2vh - 1px - 3vh);
+
+    overflow-y: scroll;
+
+    padding: 1.5vh 1em;
+
+    background-color: #f2f2f2;
+    color: #212121;
+
+    font-size: 0.9em;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.side > .content {
+    flex: 1 1 auto;
+}
+
+main h1 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5vh;
+}
+
+.modal {
+    background-color: #fdfdfd;
+    padding-bottom: 10px;
+}
+
+#controls {
+    display: flex;
+
+    padding-bottom: 25px;
+}
+
+.name {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 50px;
+
+    background-color: #2b1b03;
+    color: #fdfdfd;
+
+    font-size: 1.7em;
+}
+
+.modal-main {
+    padding: 1em; 
+}
+
+/** Utility Classes */
+.center {
+    width: max-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.full-row {
+    flex: 1 0 100%;
+
+    max-width: 800px;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.background {
+    padding: 0.7em;
+}
+
+.default-background {
+    background-color: #2b1b03;
+}
+
+.button {
+    width: max-content;
+
+    border-radius: 5px;
+    padding: 8px 17px;
+    cursor: pointer;
+}
+
+.large-button {
+    font-size: 1.6em;
+}
+
+.medium-button {
+    font-size: 1.2em;
+}
+
+.default-button:hover {
+    box-shadow: 2px 2px 6px 1px #5c523e;
+}
+
+.default-button {
+    background: #2b1b03;
+    color: #fdfdfd;
+}
+
+nav li {
+    cursor: pointer;
+}
+
+nav li:hover {
+    text-decoration: underline;
+}
+
+.button-group {
+    display: flex;
+}
+
+.button-group > div {
+    margin: 0 2em;
+}
+
+.hidden {
+    display: none;
+}
+
+/** Media queries */
+
+
+/** Image Slideshow */
+.slide {
+    /* width: max-content;
+    max-width: 100%;
+    margin: 0 auto; */
+}
+
+img {
+    max-height: calc(100vh - 55px - 2vh - 5px);
+    object-fit: contain;
+}
+.img-100 {
+    width: 100%;
+}
+/* Next & previous buttons */
+.prev, .next {
+cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    margin-top: -22px;
+    padding: 16px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {
+    background-color: rgba(0,0,0,0.8);
+}
+
+/* Caption text */
+.text {
+    color: #f2f2f2;
+    font-size: 15px;
+    padding: 8px 12px;
+    position: absolute;
+    bottom: 8px;
+    text-align: center;
+}
+
+.active, .dot:hover {
+    background-color: #717171;
+}
+
+/* Fading animation */
+.fade {
+    -webkit-animation-name: fade;
+    -webkit-animation-duration: 1.5s;
+    animation-name: fade;
+    animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade {
+    from {opacity: .4}
+    to {opacity: 1}
+}
+
+@keyframes fade {
+    from {opacity: .4}
+    to {opacity: 1}
+}
