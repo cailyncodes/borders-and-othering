@@ -20,5 +20,8 @@
   "dependencies": {
     "leaflet": "~0.7.2",
     "mapbox-gl-leaflet": "0.0.5"
-  }
+	},
+	"engines": {
+		"node": "~8"
+	}
 }
