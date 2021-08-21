@@ -43,6 +43,19 @@ const geostyles = function () {
   );
 };
 
+// GeoData
+const geodata = function () {
+    return (
+      gulp
+        .src(["app/geodata/*.json"])
+        // .pipe($.jshint('.jshintrc'))
+        // .pipe($.jshint.reporter('default'))
+        .pipe(gulp.dest("app/geodata"))
+        .pipe(gulp.dest("dist/geodata"))
+        .pipe($.size())
+    );
+  };
+
 // HTML=
 const html = function () {
   var jsFilter = $.filter("app/scripts/*.js", { restore: true });
@@ -149,7 +162,7 @@ const registerWatch = function () {
   gulp.watch("app/resources/images/*", images);
 };
 
-const build = gulp.series(styles, scripts, geostyles, html, images);
+const build = gulp.series(styles, scripts, geostyles, geodata, html, images);
 
 exports.build = build;
 exports.clean = clean;
