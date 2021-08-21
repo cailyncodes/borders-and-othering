@@ -34,7 +34,7 @@ const scripts = function () {
 const geostyles = function () {
   return (
     gulp
-      .src(["app/resources/geostyle/*.json"])
+      .src(["app/resources/geostyles/*.json"])
       // .pipe($.jshint('.jshintrc'))
       // .pipe($.jshint.reporter('default'))
       .pipe(gulp.dest("app/geostyles"))
@@ -47,7 +47,7 @@ const geostyles = function () {
 const html = function () {
   var jsFilter = $.filter("app/scripts/*.js", { restore: true });
   var cssFilter = $.filter("app/styles/*.css", { restore: true });
-  // var geoStyleFilter = $.filter('app/geostyle/*.json');
+  // var geoStyleFilter = $.filter('app/geostyles/*.json');
 
   const assets = $.useref.assets();
 
@@ -109,7 +109,7 @@ const reload = function () {
       "app/resources/css/*.css",
       "app/resources/js/*.js",
       "app/resources/images/*",
-      "app/resources/geostyle/*",
+      "app/resources/geostyles/*",
     ])
     .pipe($.connect.reload());
 };
@@ -128,7 +128,7 @@ const registerWatch = function () {
       "app/resources/css/*.css",
       "app/resources/js/*.js",
       "app/resources/images/*",
-      "app/resources/geostyle/*",
+      "app/resources/geostyles/*",
     ],
     {
         ignoreInitial: true
@@ -143,7 +143,7 @@ const registerWatch = function () {
   gulp.watch("app/resources/js/*.js", scripts);
 
   // Watch .json files
-  gulp.watch("app/resources/geostyle/*.json", geostyles);
+  gulp.watch("app/resources/geostyles/*.json", geostyles);
 
   // Watch image files
   gulp.watch("app/resources/images/*", images);

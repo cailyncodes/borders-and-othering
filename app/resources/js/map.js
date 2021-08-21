@@ -309,7 +309,7 @@ function initMainMap() {
     });
 
     var token = 'pk.eyJ1IjoiY2FpbHluY29kZXMiLCJhIjoiY2p0dXJ3aWo0MDIxNjN6bWYxbTg4djRkaSJ9.USG8kkczoyTQfgCAxIQTsQ';
-    var styleUrl = window.location.hostname == "localhost" ? './resources/geostyle/base.json' : './geostyle/base.json';
+    var styleUrl = window.location.hostname == "localhost" ? './resources/geostyles/base.json' : './geostyles/base.json';
     gl = L.mapboxGL({
         accessToken: token,
         style: styleUrl
