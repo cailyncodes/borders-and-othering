@@ -38,7 +38,7 @@ const geostyles = function () {
       // .pipe($.jshint('.jshintrc'))
       // .pipe($.jshint.reporter('default'))
       .pipe(gulp.dest("app/geostyles"))
-      .pipe(gulp.dest("dist/geostyle"))
+      .pipe(gulp.dest("dist/geostyles"))
       .pipe($.size())
   );
 };
@@ -83,9 +83,7 @@ const clean = function () {
   return gulp
     .src(
       [
-        "dist/styles",
-        "dist/scripts",
-        "dist/images",
+        "dist",
         "app/styles",
         "app/scripts",
         "app/geostyles",
@@ -149,9 +147,6 @@ const registerWatch = function () {
 
   // Watch image files
   gulp.watch("app/resources/images/*", images);
-
-  // Watch bower files
-  gulp.watch("bower.json", wiredep);
 };
 
 const build = gulp.series(styles, scripts, geostyles, html, images);
