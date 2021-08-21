@@ -47,7 +47,7 @@ const geostyles = function () {
 const geodata = function () {
     return (
       gulp
-        .src(["app/geodata/*.json"])
+        .src(["app/geodata/*"])
         // .pipe($.jshint('.jshintrc'))
         // .pipe($.jshint.reporter('default'))
         .pipe(gulp.dest("app/geodata"))
