@@ -1,239 +1,568 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta charset="UTF-8">
-        <title>Borders and Othering: (De)Constructing Maps of North America</title>
-        <!-- build:css styles/vendor.css -->
-        <link rel="stylesheet" href="lib/styles/leaflet.css" />
-        <!-- bower:css -->
-        <!-- endbower -->
-        <!-- endbuild -->
-        <!-- build:css styles/map.css -->
-        <link rel="stylesheet" href="resources/css/map.css" />
-        <!-- endbuild -->
-        <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.54.0/mapbox-gl.css' rel='stylesheet' />
-    </head>
-    <body>
-        <header class="text-center">
-            <div>
-                <h1>Borders and Othering</h1>
-            </div>
-            <nav>
-                <ul>
-                    <li class="link" data-href="/">Home</li>
-                    <li class="link" data-href="map.html">Map</li>
-                    <li class="link" data-href="data.html">Data</li>
-                    <li class="link" data-href="resources.html">Resources</li>
-                    <li class="link" data-href="about.html">About</li>
-                </ul>
-            </nav>
-        </header>
-        <main>
-            <div id="load" style="position:fixed; top:18px;left: 39.7vw;z-index: 99;color: white;font-size: 1.4em;" class="">LOADING PLEASE WAIT</div>
-            <div class="map" id="google-map"></div>
-            <div class="map hidden" id="main-map"></div>
-            <div class="map hidden" id="images">
-                <!-- Full-width images with number and caption text -->
-                <div class="slide fade">
-                    <img src="images/Landing_Map_of_North_America_Full.jpg">
-                    <div class="text">Map of North America 1826</div>
-                </div>                
-                <div class="slide fade">
-                    <img src="images/Map_of_Mexico_1847.jpg">
-                    <div class="text">Map of Mexico 1847</div>
-                </div>
-                
-                <!-- Next and previous buttons -->
-                <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-                <a class="next" onclick="plusSlides(1)">&#10095;</a>
-            </div>
-            <div class="side">
-                <div class="content" id="start">
-                    <h1 class="center">What is a map?</h1>
-                    <p>As you go through this tour, we will be leading up to the question, "What is a map?" We first ask, however, "What is on a map?" To help answer this, we look to a commonly seen and used map: Google Maps. Take a moment to jot down what you see and notice on this map. Feel free to zoom in and drag the map around as well if you want.</p>
-                    <br />
-                    <div><textarea class="full-width" data-input-id="before-on-map"></textarea></div>
-                    <br />
-                </div>
-                <div class="content hidden" id="content-1">
-                    <h1 class="center">What is on a map?</h1>
-                    <p>Some of the things we noticed were:</p>
-                    <ul>
-                        <li>Political entities: Countries, states, territories, cities, and towns.</li>
-                        <li>The place name and borders of political entities.</li>
-                        <li>Geographic features such as lakes, rivers, and other bodies of water and their names.</li>
-                        <li>Roads, streets, and highways.</li>
-                        <li>The separation of land and water.</li>
-                        <li>National and state parks and other protected land.</li>
-                        <li>And potentially many others – there are no right or wrong answers.</li>
-                    </ul>
-                    <p>It seems that maps are describing the space and things around us. They serve to document, name, and label. We can also think of maps as useful tools for navigating this space – how to get from place to place. They also tell us what exists in the places we cannot see.</p>
-                    <br />
-                    <p>You can check out the <a href="https://geography.wisc.edu/histcart/" target="_blank">History of Cartography Project</a> for more information about the history of maps.</p>
-                    <br />
-                </div>
-                <div class="content hidden" id="content-2">
-                    <h1 class="center">What is not on a map?</h1>
-                    <p>Now that we’ve discussed what is on a map, we need to ask what is missing. This might be harder to answer but take a moment to think about what information could be included on a map that this map does not include.</p>
-                    <br />
-                    <div><textarea class="full-width" data-input-id="before-not-on-map"></textarea></div>
-                    <br />
-                    <p>As you continue to explore, we will highlight more examples of what is missing and how we can reimagine maps to include this information.</p>
-                    <br />
-                </div>
-                <div class="content hidden" id="content-3">
-                    <h1 class="center">Different Types of Maps</h1>
-                    <p>So far, we have only looked at one map. Use the drop down below to explore different versions of this map. Pay attention to how the information displayed changes with each of these versions. What is included on one version that is missing from another?</p>
-                    <br />
-                    <div id="google-maps-basemap-control" class="center">
-                        <select>
-                            <option selected="selected">Roadmap</option>
-                            <option>Terrain</option>
-                            <option>Satellite</option>
-                            <option>Hybrid</option>
-                        </select>
-                    </div>
-                    <br />
-                    <div><textarea class="full-width" data-input-id="before-on-map"></textarea></div>
-                    <br />
-                    <p>If you were only to see one of these maps, what would be difficult to identify?</p>
-                    <br />
-                    <p>We suggest that on the maps that do not include borders it would be difficult to determine the border between countries and states. Consider how that affects understandings of nationhood and immigration policies.</p>
-                    <br />
-                    <p>On the maps without data about the terrain, information about the three-dimensionality of space is lost. Instead, it appears that all the land has no elevation change. Also, these maps hide details about forest coverage and many other geographic features that provide useful context to the space in question.</p>
-                    <br />
-                    <p>There are many other features you may have noticed that are difficult or easy to identify depending on the different maps. Our selections above are not meant to be exhaustive. Your alternatives are valid and contribute to the wide array of uses of maps.</p>
-                    <br />
-                </div>
-                <div class="content hidden" id="content-4">
-                    <h1 class="center">What maps are not</h1>
-                    <p>We began by saying we were building up to question of “What is a map?” Before answering that, we think it is important to consider what maps are not. Despite what may be our initial intuition, maps are not objective. As we have seen, there are several ways to represent the same space. These different versions are the results of many decisions and often reflect the opinions (and biases) of the people making the map. What happens when the people making maps try to tell a specific story that leaves out important details?</p>
-                    <br />
-                </div>
-                <div class="content hidden" id="content-5">
-                    <h1 class="center">Deconstructing Maps</h1>
-                    <p>For the rest of this tour, we will be switching to a different digital map that will allow us to piece together various mapping components and see what happens when we mix them together in different ways.</p>
-                    <br />
-                    <p>Here is a map in one of its simplest forms. We will be using this to build up to more detailed maps. Notice that the only features it includes are land/water boundaries and two different colors denoting land and water, respectively.</p>
-                    <br />
-                    <p>A central theme we will explore is what we call "hidden dimensions of maps." This refers to the context of a map – such as the geography, date, and labeling authority (the people who assign names to places), for example – that changes the way a map appears but often is not explicitly mentioned. How would maps look if we changed these hidden dimensions?</p>
-                    <br />
-                </div>
-                <div class="content hidden" id="content-6">
-                    <h1 class="center">Deconstructing Borders</h1>
-                    <p>First, we are going to add the borders of political entities and indigenous groups. We are going to focus on the impact of declaring borders and how they function to control space.</p>
-                    <br />
-                    <p>The purple overlay corresponds to the territory of indigenous communities as defined by <a href="http://native-land.ca" target="_blank">Native Land Digital</a>. You will also see the political borders of countries, states, and counties in a grey outline. These correspond to the present-day borders. Notice how they all fit together with no overlap. This is largely premised on the Euro-centric idea that only one person can own a plot of land.</p>
-                    <br />
-                    <p>Notice also, however, that there is much overlap of the indigenous-land data. Native Land Digital says, "Overlapping [data] allows people to get a sense of the depth and complexity of Indigenous history where they live." This challenges Euro-centric models of mapping and territory control. The origin of mapping was in part for the need to identify the extent of territory and to support war and violence to enforce these borders. It is innately difficult for maps as a form to display overlapping data.</p>
-                    <br />
-                    <p>The maps that most people use only have the borders of countries, states, and possibly cities or counties. Think about what message this sends to indigenous peoples and how their histories are erased and forgotten.</p>
-                    <br />
-                    <p>There is an entire field of study dedicated to borders: Border Studies. With this field, we can see that there are different types of borders, different ways of describing borders, and different ways of understanding the impact of borders. We won’t delve into all of this, but you can check out the reading list for a selection of articles.</p>
-                    <br />
-                    <p>You can also read more about the colonial legacy of maps in North America with this <a href="https://dcc.newberry.org/collections/maps-and-the-beginnings-of-colonial-north-america" target="_blank">blog entry by the Newberry</a>.</p>
-                    <br />
-                </div>
-                <div class="content hidden" id="content-7">
-                    <h1 class="center">Deconstructing Time</h1>
-                    <p>So far, we have looked at modern maps with the current political boundaries and borders. It is important to remember that borders, both political and geographic, change over time. Time is one of the strongest hidden dimensions on maps. This is not to say that maps omit labeling time. Rather, it is the absence of borders and geographic features from earlier times that presents a version of history that ignores or forgets the past, which includes land theft, war, and violence.</p>
-                    <br />
-                    <p>We currently only look at the changes of the borders of countries over time. However, if you want to learn more about indigenous land over time and see maps of the seizure of such lands by the United States, check out <a href="http://invasionofamerica.ehistory.org" target="_blank">http://invasionofamerica.ehistory.org</a>.</p>
-                    <br />
-                    <p>In order to better represent how land loss occurred, we will overlay shaded regions corresponding to the present-day borders of Mexico and the United States. The data on country borders used here is original data modified from several data sets. You can read more about this on the <a href="./data.html">Data tab</a>.</p>
-                    <br />
-                    <p>You can use the slider to step back in time and see how the border between the U.S. and Mexico has changed. The slider goes from 1821 – the year of Mexico’s independence – to 1859, the last year of substantial change in this border and effectively the present-day border.</p>
-                    <br />
-                    <div class="center text-center">
-                        <label for="time" id="time-display"></label><br />
-                        <input id="time" name="time" type="range" min="-4678715038000" max="-3471292800000" step="2629800000" value="-3471292800000" />
-                    </div>
-                    <br />
-                    <p>Notice how much the border has changed. With the original border, Mexico included the entirety of California, Nevada, Arizona, New Mexico, Texas, Utah, and parts of Colorado and Wyoming. In 1845, Then-General Zachary Taylor, without provocation, led the U.S. invasion into Mexico. This act of aggression, fueled in part by U.S. westward expansion launched the start of the three-year long Mexican-American War. Its end was marked by Treaty of Guadalupe-Hidalgo, which outlined the theft of over 55% of Mexico’s pre-war territory claim.</p>
-                    <br />
-                    <p>Families, friends, businesses, and towns were newly divided, separated from each other by an imposed political border and constructed sense of national belonging. While Americans of Mexican descent are often cast as foreign, activists and scholars often repeat the quip, "We didn’t cross the border; the border crossed us." For decades following the ratification of the treaty, people continued to freely move as they had between the new U.S.-Mexico boundary. Their reality was not yet defined by the artificial division of land. Even the Rio Grande, which appears to create a physical border, was crossed liberally.</p>
-                    <br />
-                    <p>The movement of the border over time and the movement of people across the border has been largely lost in the public’s memory. Media and politicians describe the current border with language that suggests a permanent past unchanged from the present. This idea is one of the many ways support is garnered for various xenophobic projects, such as a border wall.</p>
-                    <br />
-                    <p>Consider the role that maps have in hiding this history. When we look at most modern maps, they show no indication of this contentious past. They also support political rhetoric that treats migrants as "illegal" by deeming the border as a fixed political necessity.</p>
-                    <br />
-                </div>
-                <div class="content hidden" id="content-8">
-                    <h1 class="center">Deconstructing Placenames</h1>
-                    <p>We now turn to the names of places, specifically countries, states, and cities.</p>
-                    <br />
-                    <p>There may be value in using English for all the locations; however, it begins to erase other languages and the communities who use those languages. Use the selectors below to change the language of display and the specificity of the labels. Note that these are collected by one source and may gloss over naming disagreements that are not visible here. We encourage you to consider the ways this may ignore certain histories.</p>
-                    <br />
-                    <div id="language-placename-control" class="center">
-                        <select>
-                            <option selected="selected">Local Names</option>
-                            <option>English</option>
-                            <option>Spanish</option>
-                            <option>French</option>
-                            <option>German</option>
-                            <option>Arabic</option>
-                            <option>Korean</option>
-                            <option>Japanese</option>
-                            <option>Russian</option>
-                            <option>Portuguese</option>
-                        </select>
-                    </div>
-                    <br />
-                    <div id="placename-label-control" class="center">
-                        <select>
-                            <option selected="selected">Country</option>
-                            <option>State</option>
-                            <option>Settlement</option>
-                            <option>All</option>
-                        </select>
-                    </div>
-                    <br />
-                    <p>None of these languages are indigenous languages nor for places of indigenous land. We have added the ability that if you click on the map, a list of indigenous communities that contain that point will be shown below (again, this data is from Native Land Digital). It most cases, the name will be the indigenous-language name.</p>
-                    <br />
-                    <p id="indigenous-point-click"></p>
-                    <br />
-                    <p>It is also important to remember that many indigenous groups have names for space that are ignored by most mapping authorities or dominant groups. An example of this is Bdé Makhá Ská, a lake in Očeti Šakówiŋ/Minnesota. You can read more about this with <a href="https://cla.umn.edu/american-studies/news-events/story/colonialism-sovereignty-restoration-bde-maka-ska" target="_blank">this article</a> and <a href="http://www.startribune.com/lake-calhoun-bde-maka-ska-here-s-the-dnr-s-thinking-on-the-matter/509557352/" target="_blank">this other one</a>.</p>
-                    <br />
-                    <p>A great book to read is Keith Basso’s <em>Wisdom Sits in Places</em>. He describes how the Apache peoples understand space and place and how their naming conventions provide unique insights to promote culture and memory.</p>
-                    <br />
-                </div>
-                <div class="content hidden" id="content-9">
-                    <h1 class="center">Historical Maps</h1>
-                    <p>Now that we have taken some time to interactively explore maps, let us look back on some historical maps and see if we can identify how they were functioning. As you look at the next series of maps, think about specifically what they leave out and how that influences the viewer’s understanding of space.</p>
-                    <br />
-                    <p>There was this idea in the United States during the 19th and 20th century called "manifest destiny." It suggested that the white citizens in the United States had a God-given right to expand westward, including stealing the land and killing those who got in their way. It was partly because of manifest destiny that the United States invaded Mexico and started the Mexican-America War. Manifest destiny also played a role in the displacement and murder of indigenous peoples.</p>
-                    <br />
-                    <p>If you want to read more about manifest destiny, check out the book <em><a href="http://www.hup.harvard.edu/catalog.php?isbn=9780674948051" target="_blank">Race and Manifest Destiny</a></em> by Reginald Horsman.</p>
-                    <br />
-                </div>
-                <div class="content hidden" id="content-10">
-                    <h1 class="center">Constructing Maps</h1>
-                    <p>In this section, we ask you to construct your own map. Using what we have covered so far and the examples you have seen, take some time to play around with the different features we currently support to build your own map!</p>
-                    <br />
-                </div>
-                <div class="content hidden" id="end">
-                    <h1 class="center">Reflection</h1>
-                    <p>In reflecting on all that we have covered, we want to end by asking you again what you see or notice on maps and what you do not? There is no right or wrong answer, as we hope to have demonstrated throughout this website.</p>
-                    <br />
-                    <div><textarea class="full-width"></textarea></div>
-                    <br />
-                    <p>In answering the question we started with ("What is a map?"), we tried to show that there is not simple answer. Maps are the aggregate of complex decision making, worrying history of colonialism, and misrepresentation. This is not to say that maps cannot be useful. However, we all must acknowledge the ways maps have been and continue to be used. Further, we need to reimagine what is possible with maps and consider alternative ways to represent spatial information. For more ideas, check out Shelley Fishkin’s idea of a <a href="https://escholarship.org/uc/item/92v100t0" target="_blank">Digital Palimpsest Mapping Project</a>.</p>
-                    <br />
-                    <p>We hope that you were able to take something of meaning from this experience. In particular, we hope you were able to see maps in a new light that you had not previously considered. We also want to note that there are many more types of maps and data features that we did not cover here. We encourage you to discuss with others who have completed this tour to see what their thoughts are and if they have ideas for what other things map can encode.</p>
-                    <br />
-                </div>
-                <div id="controls">
-                    <div class="button default-button medium-button center hidden" id="prev-display">
-                        Previous
-                    </div>
-                    <div class="button default-button medium-button center" id="next-display">
-                        Next
-                    </div>
-                </div>
-            </div>
-        </main>
-        <!-- 
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="UTF-8" />
+    <title>Borders and Othering: (De)Constructing Maps of North America</title>
+    <!-- build:css styles/vendor.css -->
+    <link rel="stylesheet" href="lib/styles/leaflet.css" />
+    <!-- bower:css -->
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css styles/map.css -->
+    <link rel="stylesheet" href="resources/css/map.css" />
+    <!-- endbuild -->
+    <link
+      href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.54.0/mapbox-gl.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header class="text-center">
+      <div>
+        <h1>Borders and Othering</h1>
+      </div>
+      <nav>
+        <ul>
+          <li class="link" data-href="/">Home</li>
+          <li class="link" data-href="map.html">Map</li>
+          <li class="link" data-href="data.html">Data</li>
+          <li class="link" data-href="resources.html">Resources</li>
+          <li class="link" data-href="about.html">About</li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <div
+        id="load"
+        style="
+          position: fixed;
+          top: 18px;
+          left: 39.7vw;
+          z-index: 99;
+          color: white;
+          font-size: 1.4em;
+        "
+        class=""
+      >
+        LOADING PLEASE WAIT
+      </div>
+      <div class="map" id="google-map"></div>
+      <div class="map hidden" id="main-map"></div>
+      <div class="map hidden" id="images">
+        <!-- Full-width images with number and caption text -->
+        <div class="slide fade">
+          <img src="images/Landing_Map_of_North_America_Full.jpg" />
+          <div class="text">Map of North America 1826</div>
+        </div>
+        <div class="slide fade">
+          <img src="images/Map_of_Mexico_1847.jpg" />
+          <div class="text">Map of Mexico 1847</div>
+        </div>
+
+        <!-- Next and previous buttons -->
+        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+      </div>
+      <div class="side">
+        <div class="content" id="start">
+          <h1 class="center">What is a map?</h1>
+          <p>
+            As you go through this tour, we will be leading up to the question,
+            "What is a map?" We first ask, however, "What is on a map?" To help
+            answer this, we look to a commonly seen and used map: Google Maps.
+            Take a moment to jot down what you see and notice on this map. Feel
+            free to zoom in and drag the map around as well if you want.
+          </p>
+          <br />
+          <div>
+            <textarea
+              class="full-width"
+              data-input-id="before-on-map"
+            ></textarea>
+          </div>
+          <br />
+        </div>
+        <div class="content hidden" id="content-1">
+          <h1 class="center">What is on a map?</h1>
+          <p>Some of the things we noticed were:</p>
+          <ul>
+            <li>
+              Political entities: Countries, states, territories, cities, and
+              towns.
+            </li>
+            <li>The place name and borders of political entities.</li>
+            <li>
+              Geographic features such as lakes, rivers, and other bodies of
+              water and their names.
+            </li>
+            <li>Roads, streets, and highways.</li>
+            <li>The separation of land and water.</li>
+            <li>National and state parks and other protected land.</li>
+            <li>
+              And potentially many others – there are no right or wrong answers.
+            </li>
+          </ul>
+          <p>
+            It seems that maps are describing the space and things around us.
+            They serve to document, name, and label. We can also think of maps
+            as useful tools for navigating this space – how to get from place to
+            place. They also tell us what exists in the places we cannot see.
+          </p>
+          <br />
+          <p>
+            You can check out the
+            <a href="https://geography.wisc.edu/histcart/" target="_blank"
+              >History of Cartography Project</a
+            >
+            for more information about the history of maps.
+          </p>
+          <br />
+        </div>
+        <div class="content hidden" id="content-2">
+          <h1 class="center">What is not on a map?</h1>
+          <p>
+            Now that we’ve discussed what is on a map, we need to ask what is
+            missing. This might be harder to answer but take a moment to think
+            about what information could be included on a map that this map does
+            not include.
+          </p>
+          <br />
+          <div>
+            <textarea
+              class="full-width"
+              data-input-id="before-not-on-map"
+            ></textarea>
+          </div>
+          <br />
+          <p>
+            As you continue to explore, we will highlight more examples of what
+            is missing and how we can reimagine maps to include this
+            information.
+          </p>
+          <br />
+        </div>
+        <div class="content hidden" id="content-3">
+          <h1 class="center">Different Types of Maps</h1>
+          <p>
+            So far, we have only looked at one map. Use the drop down below to
+            explore different versions of this map. Pay attention to how the
+            information displayed changes with each of these versions. What is
+            included on one version that is missing from another?
+          </p>
+          <br />
+          <div id="google-maps-basemap-control" class="center">
+            <select>
+              <option selected="selected">Roadmap</option>
+              <option>Terrain</option>
+              <option>Satellite</option>
+              <option>Hybrid</option>
+            </select>
+          </div>
+          <br />
+          <div>
+            <textarea
+              class="full-width"
+              data-input-id="before-on-map"
+            ></textarea>
+          </div>
+          <br />
+          <p>
+            If you were only to see one of these maps, what would be difficult
+            to identify?
+          </p>
+          <br />
+          <p>
+            We suggest that on the maps that do not include borders it would be
+            difficult to determine the border between countries and states.
+            Consider how that affects understandings of nationhood and
+            immigration policies.
+          </p>
+          <br />
+          <p>
+            On the maps without data about the terrain, information about the
+            three-dimensionality of space is lost. Instead, it appears that all
+            the land has no elevation change. Also, these maps hide details
+            about forest coverage and many other geographic features that
+            provide useful context to the space in question.
+          </p>
+          <br />
+          <p>
+            There are many other features you may have noticed that are
+            difficult or easy to identify depending on the different maps. Our
+            selections above are not meant to be exhaustive. Your alternatives
+            are valid and contribute to the wide array of uses of maps.
+          </p>
+          <br />
+        </div>
+        <div class="content hidden" id="content-4">
+          <h1 class="center">What maps are not</h1>
+          <p>
+            We began by saying we were building up to question of “What is a
+            map?” Before answering that, we think it is important to consider
+            what maps are not. Despite what may be our initial intuition, maps
+            are not objective. As we have seen, there are several ways to
+            represent the same space. These different versions are the results
+            of many decisions and often reflect the opinions (and biases) of the
+            people making the map. What happens when the people making maps try
+            to tell a specific story that leaves out important details?
+          </p>
+          <br />
+        </div>
+        <div class="content hidden" id="content-5">
+          <h1 class="center">Deconstructing Maps</h1>
+          <p>
+            For the rest of this tour, we will be switching to a different
+            digital map that will allow us to piece together various mapping
+            components and see what happens when we mix them together in
+            different ways.
+          </p>
+          <br />
+          <p>
+            Here is a map in one of its simplest forms. We will be using this to
+            build up to more detailed maps. Notice that the only features it
+            includes are land/water boundaries and two different colors denoting
+            land and water, respectively.
+          </p>
+          <br />
+          <p>
+            A central theme we will explore is what we call "hidden dimensions
+            of maps." This refers to the context of a map – such as the
+            geography, date, and labeling authority (the people who assign names
+            to places), for example – that changes the way a map appears but
+            often is not explicitly mentioned. How would maps look if we changed
+            these hidden dimensions?
+          </p>
+          <br />
+        </div>
+        <div class="content hidden" id="content-6">
+          <h1 class="center">Deconstructing Borders</h1>
+          <p>
+            First, we are going to add the borders of political entities and
+            indigenous groups. We are going to focus on the impact of declaring
+            borders and how they function to control space.
+          </p>
+          <br />
+          <p>
+            The purple overlay corresponds to the territory of indigenous
+            communities as defined by
+            <a href="http://native-land.ca" target="_blank"
+              >Native Land Digital</a
+            >. You will also see the political borders of countries, states, and
+            counties in a grey outline. These correspond to the present-day
+            borders. Notice how they all fit together with no overlap. This is
+            largely premised on the Euro-centric idea that only one person can
+            own a plot of land.
+          </p>
+          <br />
+          <p>
+            Notice also, however, that there is much overlap of the
+            indigenous-land data. Native Land Digital says, "Overlapping [data]
+            allows people to get a sense of the depth and complexity of
+            Indigenous history where they live." This challenges Euro-centric
+            models of mapping and territory control. The origin of mapping was
+            in part for the need to identify the extent of territory and to
+            support war and violence to enforce these borders. It is innately
+            difficult for maps as a form to display overlapping data.
+          </p>
+          <br />
+          <p>
+            The maps that most people use only have the borders of countries,
+            states, and possibly cities or counties. Think about what message
+            this sends to indigenous peoples and how their histories are erased
+            and forgotten.
+          </p>
+          <br />
+          <p>
+            There is an entire field of study dedicated to borders: Border
+            Studies. With this field, we can see that there are different types
+            of borders, different ways of describing borders, and different ways
+            of understanding the impact of borders. We won’t delve into all of
+            this, but you can check out the reading list for a selection of
+            articles.
+          </p>
+          <br />
+          <p>
+            You can also read more about the colonial legacy of maps in North
+            America with this
+            <a
+              href="https://dcc.newberry.org/collections/maps-and-the-beginnings-of-colonial-north-america"
+              target="_blank"
+              >blog entry by the Newberry</a
+            >.
+          </p>
+          <br />
+        </div>
+        <div class="content hidden" id="content-7">
+          <h1 class="center">Deconstructing Time</h1>
+          <p>
+            So far, we have looked at modern maps with the current political
+            boundaries and borders. It is important to remember that borders,
+            both political and geographic, change over time. Time is one of the
+            strongest hidden dimensions on maps. This is not to say that maps
+            omit labeling time. Rather, it is the absence of borders and
+            geographic features from earlier times that presents a version of
+            history that ignores or forgets the past, which includes land theft,
+            war, and violence.
+          </p>
+          <br />
+          <p>
+            We currently only look at the changes of the borders of countries
+            over time. However, if you want to learn more about indigenous land
+            over time and see maps of the seizure of such lands by the United
+            States, check out
+            <a href="http://invasionofamerica.ehistory.org" target="_blank"
+              >http://invasionofamerica.ehistory.org</a
+            >.
+          </p>
+          <br />
+          <p>
+            In order to better represent how land loss occurred, we will overlay
+            shaded regions corresponding to the present-day borders of Mexico
+            and the United States. The data on country borders used here is
+            original data modified from several data sets. You can read more
+            about this on the <a href="./data.html">Data tab</a>.
+          </p>
+          <br />
+          <p>
+            You can use the slider to step back in time and see how the border
+            between the U.S. and Mexico has changed. The slider goes from 1821 –
+            the year of Mexico’s independence – to 1859, the last year of
+            substantial change in this border and effectively the present-day
+            border.
+          </p>
+          <br />
+          <div class="center text-center">
+            <label for="time" id="time-display"></label><br />
+            <input
+              id="time"
+              name="time"
+              type="range"
+              min="-4678715038000"
+              max="-3471292800000"
+              step="2629800000"
+              value="-3471292800000"
+            />
+          </div>
+          <br />
+          <p>
+            Notice how much the border has changed. With the original border,
+            Mexico included the entirety of California, Nevada, Arizona, New
+            Mexico, Texas, Utah, and parts of Colorado and Wyoming. In 1845,
+            Then-General Zachary Taylor, without provocation, led the U.S.
+            invasion into Mexico. This act of aggression, fueled in part by U.S.
+            westward expansion launched the start of the three-year long
+            Mexican-American War. Its end was marked by Treaty of
+            Guadalupe-Hidalgo, which outlined the theft of over 55% of Mexico’s
+            pre-war territory claim.
+          </p>
+          <br />
+          <p>
+            Families, friends, businesses, and towns were newly divided,
+            separated from each other by an imposed political border and
+            constructed sense of national belonging. While Americans of Mexican
+            descent are often cast as foreign, activists and scholars often
+            repeat the quip, "We didn’t cross the border; the border crossed
+            us." For decades following the ratification of the treaty, people
+            continued to freely move as they had between the new U.S.-Mexico
+            boundary. Their reality was not yet defined by the artificial
+            division of land. Even the Rio Grande, which appears to create a
+            physical border, was crossed liberally.
+          </p>
+          <br />
+          <p>
+            The movement of the border over time and the movement of people
+            across the border has been largely lost in the public’s memory.
+            Media and politicians describe the current border with language that
+            suggests a permanent past unchanged from the present. This idea is
+            one of the many ways support is garnered for various xenophobic
+            projects, such as a border wall.
+          </p>
+          <br />
+          <p>
+            Consider the role that maps have in hiding this history. When we
+            look at most modern maps, they show no indication of this
+            contentious past. They also support political rhetoric that treats
+            migrants as "illegal" by deeming the border as a fixed political
+            necessity.
+          </p>
+          <br />
+        </div>
+        <div class="content hidden" id="content-8">
+          <h1 class="center">Deconstructing Placenames</h1>
+          <p>
+            We now turn to the names of places, specifically countries, states,
+            and cities.
+          </p>
+          <br />
+          <p>
+            There may be value in using English for all the locations; however,
+            it begins to erase other languages and the communities who use those
+            languages. Use the selectors below to change the language of display
+            and the specificity of the labels. Note that these are collected by
+            one source and may gloss over naming disagreements that are not
+            visible here. We encourage you to consider the ways this may ignore
+            certain histories.
+          </p>
+          <br />
+          <div id="language-placename-control" class="center">
+            <select>
+              <option selected="selected">Local Names</option>
+              <option>English</option>
+              <option>Spanish</option>
+              <option>French</option>
+              <option>German</option>
+              <option>Arabic</option>
+              <option>Korean</option>
+              <option>Japanese</option>
+              <option>Russian</option>
+              <option>Portuguese</option>
+            </select>
+          </div>
+          <br />
+          <div id="placename-label-control" class="center">
+            <select>
+              <option selected="selected">Country</option>
+              <option>State</option>
+              <option>Settlement</option>
+              <option>All</option>
+            </select>
+          </div>
+          <br />
+          <p>
+            None of these languages are indigenous languages nor for places of
+            indigenous land. We have added the ability that if you click on the
+            map, a list of indigenous communities that contain that point will
+            be shown below (again, this data is from Native Land Digital). It
+            most cases, the name will be the indigenous-language name.
+          </p>
+          <br />
+          <p id="indigenous-point-click"></p>
+          <br />
+          <p>
+            It is also important to remember that many indigenous groups have
+            names for space that are ignored by most mapping authorities or
+            dominant groups. An example of this is Bdé Makhá Ská, a lake in
+            Očeti Šakówiŋ/Minnesota. You can read more about this with
+            <a
+              href="https://cla.umn.edu/american-studies/news-events/story/colonialism-sovereignty-restoration-bde-maka-ska"
+              target="_blank"
+              >this article</a
+            >
+            and
+            <a
+              href="http://www.startribune.com/lake-calhoun-bde-maka-ska-here-s-the-dnr-s-thinking-on-the-matter/509557352/"
+              target="_blank"
+              >this other one</a
+            >.
+          </p>
+          <br />
+          <p>
+            A great book to read is Keith Basso’s
+            <em>Wisdom Sits in Places</em>. He describes how the Apache peoples
+            understand space and place and how their naming conventions provide
+            unique insights to promote culture and memory.
+          </p>
+          <br />
+        </div>
+        <div class="content hidden" id="content-9">
+          <h1 class="center">Historical Maps</h1>
+          <p>
+            Now that we have taken some time to interactively explore maps, let
+            us look back on some historical maps and see if we can identify how
+            they were functioning. As you look at the next series of maps, think
+            about specifically what they leave out and how that influences the
+            viewer’s understanding of space.
+          </p>
+          <br />
+          <p>
+            There was this idea in the United States during the 19th and 20th
+            century called "manifest destiny." It suggested that the white
+            citizens in the United States had a God-given right to expand
+            westward, including stealing the land and killing those who got in
+            their way. It was partly because of manifest destiny that the United
+            States invaded Mexico and started the Mexican-America War. Manifest
+            destiny also played a role in the displacement and murder of
+            indigenous peoples.
+          </p>
+          <br />
+          <p>
+            If you want to read more about manifest destiny, check out the book
+            <em
+              ><a
+                href="http://www.hup.harvard.edu/catalog.php?isbn=9780674948051"
+                target="_blank"
+                >Race and Manifest Destiny</a
+              ></em
+            >
+            by Reginald Horsman.
+          </p>
+          <br />
+        </div>
+        <div class="content hidden" id="content-10">
+          <h1 class="center">Constructing Maps</h1>
+          <p>
+            In this section, we ask you to construct your own map. Using what we
+            have covered so far and the examples you have seen, take some time
+            to play around with the different features we currently support to
+            build your own map!
+          </p>
+          <br />
+        </div>
+        <div class="content hidden" id="end">
+          <h1 class="center">Reflection</h1>
+          <p>
+            In reflecting on all that we have covered, we want to end by asking
+            you again what you see or notice on maps and what you do not? There
+            is no right or wrong answer, as we hope to have demonstrated
+            throughout this website.
+          </p>
+          <br />
+          <div><textarea class="full-width"></textarea></div>
+          <br />
+          <p>
+            In answering the question we started with ("What is a map?"), we
+            tried to show that there is not simple answer. Maps are the
+            aggregate of complex decision making, worrying history of
+            colonialism, and misrepresentation. This is not to say that maps
+            cannot be useful. However, we all must acknowledge the ways maps
+            have been and continue to be used. Further, we need to reimagine
+            what is possible with maps and consider alternative ways to
+            represent spatial information. For more ideas, check out Shelley
+            Fishkin’s idea of a
+            <a href="https://escholarship.org/uc/item/92v100t0" target="_blank"
+              >Digital Palimpsest Mapping Project</a
+            >.
+          </p>
+          <br />
+          <p>
+            We hope that you were able to take something of meaning from this
+            experience. In particular, we hope you were able to see maps in a
+            new light that you had not previously considered. We also want to
+            note that there are many more types of maps and data features that
+            we did not cover here. We encourage you to discuss with others who
+            have completed this tour to see what their thoughts are and if they
+            have ideas for what other things map can encode.
+          </p>
+          <br />
+        </div>
+        <div id="controls">
+          <div
+            class="button default-button medium-button center hidden"
+            id="prev-display"
+          >
+            Previous
+          </div>
+          <div
+            class="button default-button medium-button center"
+            id="next-display"
+          >
+            Next
+          </div>
+        </div>
+      </div>
+    </main>
+    <!-- 
             <div class="center text-center">
                             <label for="satellite" id="satellite-display"></label><br />
                             <input id="satellite" name="satellite" type="range" min="0" max="100" step="1" value="100" />
@@ -245,47 +574,26 @@
                         </div>
                         <br />
         -->
-        <!-- build:js scripts/herf.js -->
-        <script src="./resources/js/href.js"></script>
-        <!-- endbuild -->
-        <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.54.0/mapbox-gl.js"></script>
-        <!-- build:js scripts/vendor.js -->
-        <script src="./lib/scripts/leaflet.js"></script>
-        <!-- endbuild -->
-        <!-- build:js scripts/mapbox-leaflet.js -->
-        <script src="./lib/scripts/leaflet-mapbox-gl.js"></script>
-        <!-- endbuild -->
-        <!-- build:js scripts/map.js -->
-        <script src="./resources/js/map.js"></script>
-        <!-- endbuild -->
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDzTXrao7PjpAV66Uwq7Aey3mwvl2G8DfY&callback=initGoogleMap"
-            async defer></script>
-        <!-- build:js scripts/wheelzoom.js -->
-        <script src="./resources/js/wheelzoom.js"></script>
-        <!-- endbuild -->
-        <!-- Quantcast Tag -->
-        <script type="text/javascript">
-            var _qevents = _qevents || [];
-            
-            (function() {
-            var elem = document.createElement('script');
-            elem.src = (document.location.protocol == "https:" ? "https://secure" : "http://edge") + ".quantserve.com/quant.js";
-            elem.async = true;
-            elem.type = "text/javascript";
-            var scpt = document.getElementsByTagName('script')[0];
-            scpt.parentNode.insertBefore(elem, scpt);
-            })();
-            
-            _qevents.push({
-            qacct:"p-85emqYE5uWk_D"
-            });
-        </script>
-        
-        <noscript>
-            <div style="display:none;">
-            <img src="//pixel.quantserve.com/pixel/p-85emqYE5uWk_D.gif" border="0" height="1" width="1" alt="Quantcast"/>
-            </div>
-        </noscript>
-        <!-- End Quantcast tag -->
-    </body>
+    <!-- build:js scripts/herf.js -->
+    <script src="./resources/js/href.js"></script>
+    <!-- endbuild -->
+    <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.54.0/mapbox-gl.js"></script>
+    <!-- build:js scripts/vendor.js -->
+    <script src="./lib/scripts/leaflet.js"></script>
+    <!-- endbuild -->
+    <!-- build:js scripts/mapbox-leaflet.js -->
+    <script src="./lib/scripts/leaflet-mapbox-gl.js"></script>
+    <!-- endbuild -->
+    <!-- build:js scripts/map.js -->
+    <script src="./resources/js/map.js"></script>
+    <!-- endbuild -->
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDzTXrao7PjpAV66Uwq7Aey3mwvl2G8DfY&callback=initGoogleMap"
+      async
+      defer
+    ></script>
+    <!-- build:js scripts/wheelzoom.js -->
+    <script src="./resources/js/wheelzoom.js"></script>
+    <!-- endbuild -->
+  </body>
 </html>

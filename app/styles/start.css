@@ -10,7 +10,7 @@ body, h1, h2, p {
 }
 
 body {
-    background-image: url("../images/Landing_Map_of_North_America_Full (2).jpg");
+    background-image: url("/images/Landing_Map_of_North_America_Full (2).jpg");
     background-position: center;
     background-size: cover;
 }
